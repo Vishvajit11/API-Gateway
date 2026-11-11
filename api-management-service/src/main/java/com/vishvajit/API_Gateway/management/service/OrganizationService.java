@@ -14,13 +14,11 @@ import com.vishvajit.API_Gateway.management.exception.ApiException;
 import com.vishvajit.API_Gateway.management.repository.ManagementUserRepository;
 import com.vishvajit.API_Gateway.management.repository.OrganizationRepository;
 import com.vishvajit.API_Gateway.management.repository.RoleRepository;
-import org.apache.kafka.common.metrics.Sensor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +50,8 @@ public class OrganizationService {
 
     @Transactional
     public OrganizationResponse create(OrganizationRequest request) {
+        long startedAt = System.nanoTime();
 
-        long startedAt = System.currentTimeMillis();
         checkUnique(request.getName(), request.getSlug(), null);
 
         Organization organization = new Organization();
@@ -92,8 +90,7 @@ public class OrganizationService {
 
     @Transactional
     public OrganizationResponse update(Long id, OrganizationRequest request) {
-
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
         Organization organization = getOrganization(id);
 
         checkUnique(request.getName(), request.getSlug(), id);
@@ -112,7 +109,7 @@ public class OrganizationService {
     @Transactional
     public OrganizationResponse changeStatus(Long id, OrganizationStatusRequest request) {
 
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
         Organization organization = getOrganization(id);
 
         if(request.getStatus() == OrganizationStatus.DELETED) {
@@ -135,8 +132,7 @@ public class OrganizationService {
 
     @Transactional
     public void delete(Long id) {
-
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
 
         Organization organization = getOrganization(id);
         organization.setStatus(OrganizationStatus.DELETED);
@@ -156,7 +152,7 @@ public class OrganizationService {
     @Transactional
     public TenantAdminResponse createTenantAdmin(Long organizationId, TenantAdminRequest request) {
 
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
         Organization organization = getOrganization(organizationId);
 
         if(managementUserRepository.findByOrganizationId(organizationId).isPresent()) {
@@ -199,10 +195,8 @@ public class OrganizationService {
     }
 
     @Transactional
-    public TenantAdminResponse updateTenantAdmin(
-            Long organizationId, TenantAdminRequest request
-    ) {
-        long startedAt = System.currentTimeMillis();
+    public TenantAdminResponse updateTenantAdmin(Long organizationId, TenantAdminRequest request) {
+        long startedAt = System.nanoTime();
         ManagementUser user = getTenantAdminEntity(organizationId);
 
         if(!user.getUsername().equals(request.getUsername())
@@ -229,7 +223,7 @@ public class OrganizationService {
     @Transactional
     public void deleteTenantAdmin(Long organizationId) {
 
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
 
         ManagementUser user = getTenantAdminEntity(organizationId);
         managementUserRepository.delete(user);
@@ -283,7 +277,7 @@ public class OrganizationService {
     @Transactional
     public OrganizationResponse updateOwnOrganization(TenantOrganizationRequest request) {
 
-        long startedAt = System.currentTimeMillis();
+        long startedAt = System.nanoTime();
         Organization organization = tenantContext.getOrganization();
 
         if(!(organization.getName().equalsIgnoreCase(request.getName()))
