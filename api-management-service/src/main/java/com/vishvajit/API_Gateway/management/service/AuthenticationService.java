@@ -1,6 +1,5 @@
 package com.vishvajit.API_Gateway.management.service;
 
-import com.nimbusds.jwt.JWTClaimsSet;
 import com.vishvajit.API_Gateway.management.dto.requstDTO.LoginRequest;
 import com.vishvajit.API_Gateway.management.dto.responseDTO.LoginResponse;
 import com.vishvajit.API_Gateway.management.entity.ManagementUser;
@@ -9,7 +8,6 @@ import com.vishvajit.API_Gateway.management.exception.ApiException;
 import com.vishvajit.API_Gateway.management.repository.ManagementUserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
@@ -44,7 +42,7 @@ public class AuthenticationService {
 
         ManagementUser user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(
-                        () -> invalidCredentials()
+                        this::invalidCredentials
                 );
 
         if(!user.isEnabled() ||
