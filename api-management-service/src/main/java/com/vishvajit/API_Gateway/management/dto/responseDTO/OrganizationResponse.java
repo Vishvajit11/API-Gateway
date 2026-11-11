@@ -19,11 +19,13 @@ public class OrganizationResponse {
     private LocalDateTime updatedAt;
 
     public static OrganizationResponse from(Organization organization) {
-        return new OrganizationResponse(organization.getId(),
+        return new OrganizationResponse(
+                organization.getId(),
                 organization.getName(),
                 organization.getSlug(),
                 organization.getStatus(),
                 organization.getCreatedAt(),
-                organization.getUpdatedAt());
+                organization.getUpdatedAt()
+        );
     }
 }
