@@ -24,6 +24,6 @@ public class HealthService {
             System.out.println("Database is not reachable: "+ e);
         }
 
-        return dbStatus;
+        return dbStatus
     }
 }
