@@ -1,0 +1,80 @@
+name: Backend CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  analytics-service:
+    name: Analytics Service CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: analytics-service/pom.xml
+
+      - name: Build and test
+        working-directory: analytics-service
+        run: |
+          chmod +x ./mvnw
+          ./mvnw --batch-mode --no-transfer-progress clean verify
+
+  api-management-service:
+    name: API Management Service CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: api-management-service/pom.xml
+
+      - name: Build and test
+        working-directory: api-management-service
+        run: |
+          chmod +x ./mvnw
+          ./mvnw --batch-mode --no-transfer-progress clean verify
+
+  smart-gateway-service:
+    name: Smart Gateway Service CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: smart-gateway-service/pom.xml
+
+      - name: Build and test
+        working-directory: smart-gateway-service
+        run: |
+          chmod +x ./mvnw
+          ./mvnw --batch-mode --no-transfer-progress clean verify
