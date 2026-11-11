@@ -18,6 +18,7 @@ public class TenantAdminResponse {
                 user.getId(),
                 user.getOrganization().getId(),
                 user.getUsername(),
-                user.isEnabled());
+                user.isEnabled()
+        );
     }
 }
