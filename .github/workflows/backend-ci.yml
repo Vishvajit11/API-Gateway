@@ -35,6 +35,14 @@ jobs:
           chmod +x ./mvnw
           ./mvnw --batch-mode --no-transfer-progress clean verify
 
+      - name: Upload Analytics Service JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-service-jar
+          path: analytics-service/target/*.jar
+          if-no-files-found: error
+          retention-days: 7
+
   api-management-service:
     name: API Management Service CI
     runs-on: ubuntu-latest
@@ -76,6 +84,14 @@ jobs:
           chmod +x ./mvnw
           ./mvnw --batch-mode --no-transfer-progress clean verify
 
+      - name: Upload API Management Service JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-management-service-jar
+          path: api-management-service/target/*.jar
+          if-no-files-found: error
+          retention-days: 7
+
   smart-gateway-service:
     name: Smart Gateway Service CI
     runs-on: ubuntu-latest
@@ -97,3 +113,11 @@ jobs:
         run: |
           chmod +x ./mvnw
           ./mvnw --batch-mode --no-transfer-progress clean verify
+
+      - name: Upload Smart Gateway Service JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: smart-gateway-service-jar
+          path: smart-gateway-service/target/*.jar
+          if-no-files-found: error
+          retention-days: 7
