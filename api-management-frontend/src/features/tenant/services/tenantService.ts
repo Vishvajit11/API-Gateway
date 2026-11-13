@@ -59,6 +59,19 @@ export type RouteVersion = {
   createdAt: string
 }
 
+export type AuditRecord = {
+  id: number
+  actor: string
+  action: string
+  resourceType: string
+  resourceId: string
+  correlationId: string | null
+  durationMs: number
+  result: string
+  details: string | null
+  createdAt: string
+}
+
 export function getOwnOrganization(): Promise<TenantOrganization> {
   return requestApi<TenantOrganization>('/api/tenant/organization')
 }
@@ -111,4 +124,8 @@ export function getTenantRouteVersions(routeId: string): Promise<RouteVersion[]>
   return requestApi<RouteVersion[]>(
     `/api/tenant/route-versions/${encodeURIComponent(routeId)}`,
   )
+}
+
+export function getTenantAuditRecords(): Promise<AuditRecord[]> {
+  return requestApi<AuditRecord[]>('/api/tenant/audit-records')
 }

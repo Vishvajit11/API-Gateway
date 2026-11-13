@@ -3,6 +3,8 @@ import type { AuthSession } from '../../auth/services/sessionStore'
 import { WorkspaceHeader } from '../../workspace/components/WorkspaceHeader'
 import type { TenantRoute } from '../services/tenantService'
 import { useTenantWorkspace } from '../hooks/useTenantWorkspace'
+import { useTenantAuditRecords } from '../hooks/useTenantAuditRecords'
+import { TenantAuditPanel } from './TenantAuditPanel'
 import { TenantOrganizationCard } from './TenantOrganizationCard'
 import { TenantRouteForm } from './TenantRouteForm'
 import { TenantRouteHistoryDialog } from './TenantRouteHistoryDialog'
@@ -43,6 +45,7 @@ export function TenantWorkspacePage({
     loadRouteVersions,
     clearRouteVersions,
   } = useTenantWorkspace()
+  const auditRecords = useTenantAuditRecords()
 
   function openCreateRoute() {
     setEditingRoute(null)
@@ -112,6 +115,12 @@ export function TenantWorkspacePage({
           onRetry={loadRoutes}
           onToggleStatus={toggleRouteStatus}
           routes={routes}
+        />
+        <TenantAuditPanel
+          errorMessage={auditRecords.errorMessage}
+          isLoading={auditRecords.isLoading}
+          onRefresh={auditRecords.loadRecords}
+          records={auditRecords.records}
         />
       </section>
       {isRouteFormOpen && organization && (
