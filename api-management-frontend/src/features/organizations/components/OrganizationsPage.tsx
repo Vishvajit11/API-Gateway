@@ -3,6 +3,7 @@ import { WorkspaceHeader } from '../../workspace/components/WorkspaceHeader'
 import type { AuthSession } from '../../auth/services/sessionStore'
 import { OrganizationForm } from './OrganizationForm'
 import { OrganizationTable } from './OrganizationTable'
+import { TenantAdminPanel } from './TenantAdminPanel'
 import { useOrganizations } from '../hooks/useOrganizations'
 import type { Organization } from '../services/organizationService'
 import './organizations.css'
@@ -28,6 +29,8 @@ export function OrganizationsPage({
     remove,
   } = useOrganizations()
   const [editingOrganization, setEditingOrganization] =
+    useState<Organization | null>(null)
+  const [managingAdminOrganization, setManagingAdminOrganization] =
     useState<Organization | null>(null)
   const [isFormOpen, setIsFormOpen] = useState(false)
 
@@ -115,6 +118,7 @@ export function OrganizationsPage({
           ) : (
             <OrganizationTable
               onEdit={openEditForm}
+              onManageAdmin={setManagingAdminOrganization}
               onRemove={confirmRemove}
               onStatusChange={changeStatus}
               organizations={organizations}
@@ -122,6 +126,12 @@ export function OrganizationsPage({
           )}
         </section>
       </section>
+      {managingAdminOrganization && (
+        <TenantAdminPanel
+          onClose={() => setManagingAdminOrganization(null)}
+          organization={managingAdminOrganization}
+        />
+      )}
     </main>
   )
 }

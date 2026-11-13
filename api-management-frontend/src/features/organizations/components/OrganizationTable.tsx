@@ -6,6 +6,7 @@ import type {
 type OrganizationTableProps = {
   organizations: Organization[]
   onEdit: (organization: Organization) => void
+  onManageAdmin: (organization: Organization) => void
   onRemove: (organization: Organization) => void
   onStatusChange: (
     organizationId: number,
@@ -22,6 +23,7 @@ const availableStatuses: OrganizationStatus[] = [
 export function OrganizationTable({
   organizations,
   onEdit,
+  onManageAdmin,
   onRemove,
   onStatusChange,
 }: OrganizationTableProps) {
@@ -70,6 +72,13 @@ export function OrganizationTable({
                     type="button"
                   >
                     Edit
+                  </button>
+                  <button
+                    className="textButton"
+                    onClick={() => onManageAdmin(organization)}
+                    type="button"
+                  >
+                    Tenant admin
                   </button>
                   <select
                     aria-label={`Change status for ${organization.name}`}
