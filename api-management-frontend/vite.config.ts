@@ -8,6 +8,12 @@ const staticOutput = fileURLToPath(
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8082',
+      '/health': 'http://localhost:8082',
+    },
+  },
   build: {
     outDir: staticOutput,
     emptyOutDir: true,
