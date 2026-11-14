@@ -1,0 +1,140 @@
+.topBar {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 max(0px, calc((100vw - 1120px) / 2));
+  border-bottom: 1px solid #e1e6ee;
+}
+
+.brand,
+.accountArea {
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  gap: 10px;
+  color: #172033;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brandMark {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 10px;
+  background: #5368bc;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.accountArea {
+  gap: 18px;
+}
+
+.accountDetails {
+  display: grid;
+  gap: 3px;
+  text-align: right;
+}
+
+.accountName {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.accountRole {
+  color: #687386;
+  font-size: 0.76rem;
+}
+
+.secondaryButton {
+  border-color: #d7dce5;
+  background: #fff;
+  color: #30394a;
+}
+
+.secondaryButton:hover {
+  background: #f5f7fa;
+}
+
+.workspaceCard {
+  width: min(100%, 760px);
+  margin: 64px auto 0;
+  padding: 36px;
+  border: 1px solid #e1e6ee;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(23 32 51 / 5%);
+}
+
+.workspaceCard .eyebrow {
+  margin-bottom: 12px;
+}
+
+.workspaceCard h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 5vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.organizationInfo {
+  margin: 20px 0 0;
+  color: #5b6475;
+  font-size: 0.9rem;
+}
+
+.organizationInfo strong {
+  margin-left: 4px;
+  color: #30394a;
+}
+
+.nextStep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #f4f7f5;
+  color: #385b46;
+  font-size: 0.9rem;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #409363;
+}
+
+@media (max-width: 520px) {
+  .topBar {
+    align-items: flex-start;
+    padding: 4px 0 14px;
+  }
+
+  .accountArea {
+    gap: 10px;
+  }
+
+  .accountRole {
+    max-width: 135px;
+  }
+
+  .secondaryButton {
+    padding: 8px 11px;
+  }
+
+  .workspaceCard {
+    margin-top: 36px;
+    padding: 26px;
+  }
+}

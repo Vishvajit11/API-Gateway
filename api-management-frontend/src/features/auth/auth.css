@@ -1,0 +1,62 @@
+.loginCard {
+  width: min(100%, 440px);
+  margin: max(8vh, 32px) auto;
+  padding: 36px;
+  border: 1px solid #e1e6ee;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgb(23 32 51 / 6%);
+}
+
+.loginHeading {
+  margin-bottom: 28px;
+}
+
+.loginHeading .brand {
+  gap: 12px;
+  color: #5368bc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fieldLabel {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.textInput {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #cfd6e2;
+  border-radius: 7px;
+  color: #172033;
+  outline: none;
+}
+
+.textInput:focus {
+  border-color: #5368bc;
+  box-shadow: 0 0 0 3px rgb(83 104 188 / 14%);
+}
+
+.loginForm {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.errorMessage {
+  margin: 6px 0 0;
+  color: #b42318;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 520px) {
+  .loginCard {
+    padding: 26px;
+  }
+}
