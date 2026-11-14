@@ -13,6 +13,29 @@ permissions:
   contents: read
 
 jobs:
+  api-management-frontend:
+    name: API Management Frontend CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: api-management-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: api-management-frontend
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: api-management-frontend
+        run: npm run build
+
   analytics-service:
     name: Analytics Service CI
     runs-on: ubuntu-latest
