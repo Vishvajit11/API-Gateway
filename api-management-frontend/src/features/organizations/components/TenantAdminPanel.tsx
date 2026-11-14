@@ -24,6 +24,7 @@ export function TenantAdminPanel({
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [enabled, setEnabled] = useState(true)
+  const [validationMessage, setValidationMessage] = useState('')
 
   useEffect(() => {
     setUsername(tenantAdmin?.username ?? '')
@@ -33,6 +34,23 @@ export function TenantAdminPanel({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setValidationMessage('')
+
+    if (!username.trim()) {
+      setValidationMessage('Username is required.')
+      return
+    }
+
+    if (!password.trim()) {
+      setValidationMessage('Password cannot be blank.')
+      return
+    }
+
+    if (password.length < 8) {
+      setValidationMessage('Password must contain at least 8 characters.')
+      return
+    }
+
     if (await save({ username: username.trim(), password, enabled })) {
       setPassword('')
     }
@@ -136,6 +154,11 @@ export function TenantAdminPanel({
               />
               <span>Account enabled</span>
             </label>
+            {validationMessage && (
+              <p className="organizationError" role="alert">
+                {validationMessage}
+              </p>
+            )}
             <div className="tenantAdminActions">
               {tenantAdmin && (
                 <button

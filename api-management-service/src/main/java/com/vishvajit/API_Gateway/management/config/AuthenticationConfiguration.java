@@ -60,7 +60,10 @@ public class AuthenticationConfiguration {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/health", "/api/auth/login").permitAll()
+                        auth.requestMatchers(
+                                        "/", "/index.html", "/assets/**", "/favicon.ico",
+                                        "/health", "/api/auth/login"
+                                ).permitAll()
                                 .requestMatchers("/api/platform/**").hasRole("PLATFORM_ADMIN")
                                 .requestMatchers("/api/tenant/**").hasRole("TENANT_ADMIN")
                                 .requestMatchers("/api/gateway/**").hasRole("GATEWAY_SERVICE")

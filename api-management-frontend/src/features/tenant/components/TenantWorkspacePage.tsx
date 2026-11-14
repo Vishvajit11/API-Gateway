@@ -8,6 +8,7 @@ import { TenantAuditPanel } from './TenantAuditPanel'
 import { TenantOrganizationCard } from './TenantOrganizationCard'
 import { TenantRouteForm } from './TenantRouteForm'
 import { TenantRouteHistoryDialog } from './TenantRouteHistoryDialog'
+import { TenantRouteLookup } from './TenantRouteLookup'
 import { TenantRoutesPanel } from './TenantRoutesPanel'
 import './tenant.css'
 
@@ -116,6 +117,7 @@ export function TenantWorkspacePage({
           onToggleStatus={toggleRouteStatus}
           routes={routes}
         />
+        <TenantRouteLookup />
         <TenantAuditPanel
           errorMessage={auditRecords.errorMessage}
           isLoading={auditRecords.isLoading}

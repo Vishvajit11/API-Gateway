@@ -25,6 +25,11 @@ export function OrganizationForm({
     event.preventDefault()
     setValidationMessage('')
 
+    if (!name.trim()) {
+      setValidationMessage('Organization name is required.')
+      return
+    }
+
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
       setValidationMessage(
         'Use lowercase letters, numbers, and single hyphens for the slug.',

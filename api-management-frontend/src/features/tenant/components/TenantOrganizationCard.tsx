@@ -22,6 +22,7 @@ export function TenantOrganizationCard({
 }: TenantOrganizationCardProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [name, setName] = useState('')
+  const [validationMessage, setValidationMessage] = useState('')
 
   function startEditing() {
     setName(organization?.name ?? '')
@@ -30,6 +31,12 @@ export function TenantOrganizationCard({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    setValidationMessage('')
+    if (!name.trim()) {
+      setValidationMessage('Organization name is required.')
+      return
+    }
+
     if (await onSaveName(name.trim())) {
       setIsEditing(false)
     }
@@ -79,6 +86,11 @@ export function TenantOrganizationCard({
                 value={name}
               />
             </label>
+            {validationMessage && (
+              <p className="tenantLookupError" role="alert">
+                {validationMessage}
+              </p>
+            )}
             <div className="tenantFormActions">
               <button
                 className="secondaryButton"

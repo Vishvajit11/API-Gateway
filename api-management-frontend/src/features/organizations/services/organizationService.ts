@@ -35,6 +35,10 @@ export function getOrganizations(): Promise<Organization[]> {
   return requestApi<Organization[]>(organizationsPath)
 }
 
+export function getOrganizationById(id: number): Promise<Organization> {
+  return requestApi<Organization>(`${organizationsPath}/${id}`)
+}
+
 export function createOrganization(
   input: OrganizationInput,
 ): Promise<Organization> {

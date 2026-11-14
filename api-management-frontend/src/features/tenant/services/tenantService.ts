@@ -87,6 +87,10 @@ export function getTenantRoutes(): Promise<TenantRoute[]> {
   return requestApi<TenantRoute[]>('/api/tenant/routes')
 }
 
+export function getTenantRouteById(routePk: number): Promise<TenantRoute> {
+  return requestApi<TenantRoute>(`/api/tenant/routes/${routePk}`)
+}
+
 export function createTenantRoute(input: RouteInput): Promise<TenantRoute> {
   return requestApi<TenantRoute>('/api/tenant/routes', {
     method: 'POST',

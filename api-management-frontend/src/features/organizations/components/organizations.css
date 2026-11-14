@@ -182,6 +182,76 @@
   padding: 22px;
 }
 
+.organizationError {
+  margin: 14px 0 0;
+  color: #b42318;
+  font-size: 0.86rem;
+}
+
+.organizationLookup {
+  margin-bottom: 22px;
+}
+
+.lookupForm {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 18px 22px;
+}
+
+.lookupField {
+  display: grid;
+  width: min(100%, 300px);
+  gap: 7px;
+  color: #30394a;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.lookupField input {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #cfd6e2;
+  border-radius: 7px;
+}
+
+.lookupForm .secondaryButton {
+  border-color: #d7dce5;
+  background: #fff;
+  color: #30394a;
+}
+
+.lookupError {
+  margin: 0 22px 16px;
+  color: #b42318;
+  font-size: 0.86rem;
+}
+
+.lookupDetails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0 22px 20px;
+}
+
+.lookupDetails div {
+  min-width: 0;
+}
+
+.lookupDetails dt {
+  color: #687386;
+  font-size: 0.76rem;
+}
+
+.lookupDetails dd {
+  margin: 5px 0 0;
+  overflow-wrap: anywhere;
+  color: #30394a;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
 .organizationFormFields {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -352,6 +422,22 @@
 
   .organizationFormFields {
     grid-template-columns: 1fr;
+  }
+
+  .lookupForm {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .lookupField {
+    width: 100%;
+  }
+
+  .lookupDetails {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
   .organizationsPanelHeader {

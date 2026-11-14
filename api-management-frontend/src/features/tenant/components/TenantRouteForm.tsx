@@ -100,6 +100,11 @@ export function TenantRouteForm({
     event.preventDefault()
     setValidationMessage('')
 
+    if (!routeId.trim() || !name.trim()) {
+      setValidationMessage('Route ID and name are required.')
+      return
+    }
+
     if (allowedMethods.length === 0) {
       setValidationMessage('Select at least one HTTP method.')
       return
@@ -117,8 +122,21 @@ export function TenantRouteForm({
       return
     }
 
-    if (!/^https?:\/\//i.test(targetBaseUrl.trim())) {
+    let targetUrl: URL
+    try {
+      targetUrl = new URL(targetBaseUrl.trim())
+    } catch {
+      setValidationMessage('Enter a valid HTTP or HTTPS target URL.')
+      return
+    }
+
+    if (targetUrl.protocol !== 'http:' && targetUrl.protocol !== 'https:') {
       setValidationMessage('Target base URL must use HTTP or HTTPS.')
+      return
+    }
+
+    if (headerRules.some((rule) => !rule.headerName.trim())) {
+      setValidationMessage('Header names are required for every header rule.')
       return
     }
 
@@ -134,7 +152,8 @@ export function TenantRouteForm({
     const requestLimit = requestsPerMinute ? Number(requestsPerMinute) : null
     const responseTimeout = Number(responseTimeoutMs)
     if (
-      (requestLimit !== null && requestLimit < 1) ||
+      (requestLimit !== null &&
+        (!Number.isInteger(requestLimit) || requestLimit < 1)) ||
       !Number.isInteger(responseTimeout) ||
       responseTimeout < 1
     ) {
@@ -249,6 +268,7 @@ export function TenantRouteForm({
                 min={1}
                 onChange={(event) => setRequestsPerMinute(event.target.value)}
                 placeholder="No limit"
+                step={1}
                 type="number"
                 value={requestsPerMinute}
               />
@@ -260,6 +280,7 @@ export function TenantRouteForm({
                 min={1}
                 onChange={(event) => setResponseTimeoutMs(event.target.value)}
                 required
+                step={1}
                 type="number"
                 value={responseTimeoutMs}
               />

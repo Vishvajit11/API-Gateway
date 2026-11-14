@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { WorkspaceHeader } from '../../workspace/components/WorkspaceHeader'
 import type { AuthSession } from '../../auth/services/sessionStore'
 import { OrganizationForm } from './OrganizationForm'
+import { OrganizationLookup } from './OrganizationLookup'
 import { OrganizationTable } from './OrganizationTable'
 import { TenantAdminPanel } from './TenantAdminPanel'
 import { useOrganizations } from '../hooks/useOrganizations'
@@ -96,6 +97,7 @@ export function OrganizationsPage({
             organization={editingOrganization}
           />
         )}
+        <OrganizationLookup />
         <section className="organizationsPanel" aria-label="Organization list">
           <div className="organizationsPanelHeader">
             <div>
